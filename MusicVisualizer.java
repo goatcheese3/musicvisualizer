@@ -25,7 +25,7 @@ public class MusicVisualizer extends PApplet{
 
         m = new Minim(this);
 
-        au = m.loadFile("khalid.mp3", 1024);
+        au = m.loadFile("03 Key.mp3", 4096);
 
         au.loop();
 
@@ -33,14 +33,16 @@ public class MusicVisualizer extends PApplet{
     }
 
     public void draw() {
+    	frameRate(120);
         background(0);
         stroke(255);
-
+        strokeWeight(6);
         fft.forward(au.mix);
-        for(int i = 0; i < fft.specSize(); i++) {
-            line(i, height, i, height - fft.getBand(i)*8);
+        for(int i = 30; i < fft.specSize()+50; i+=15) {
+        	//rectMode(CENTER);
+          ellipse((float)i, (float)(height-250), (float)5, (float)(height - fft.getBand(i)*10*Math.log(i*100000)));
         }
-        clear();
+       
     }
 
 //    public static void main(String[] args) {
